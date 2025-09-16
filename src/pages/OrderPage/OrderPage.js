@@ -10,49 +10,49 @@ import { Link } from "react-router-dom";
 import { calcTotalPrice } from "../../components/utils";
 
 function OrderPage() {
-    const itemInCart = useSelector((state) => state.cart.itemsInCart);
+  const itemInCart = useSelector((state) => state.cart.itemsInCart);
 
-    if (itemInCart < 1) {
-        return (
-            <Typography
-                variant="h3"
-                sx={{
-                    top: "50%",
-                    position: "absolute",
-                    left: "50%",
-                    transform: "translate(-50%, 50%)",
-                }}
-                align="center"
-                color="white"
-            >
-                Ваша корзина пуста 🛒
-            </Typography>
-        );
-    }
-
+  if (itemInCart < 1) {
     return (
-        <Box>
-            <Box mt="20px">
-                <Breadcrumbs color="white" aria-label="breadcrumb">
-                    <Link to="/">Главная</Link>
-                    <Typography color="white">Корзина</Typography>
-                </Breadcrumbs>
-            </Box>
-            <Grid width="100%" container mt="20px">
-                {itemInCart.map((game) => (
-                    <OrderItem game={game} />
-                ))}
-            </Grid>
-            <Divider sx={{ marginTop: "25px" }} color="white" />
-            <Box mt="10px">
-                <Box display="flex" justifyContent="flex-end">
-                    <Typography color="white">
-                        Итого : {calcTotalPrice(itemInCart)} грн.
-                    </Typography>
-                </Box>
-            </Box>
-        </Box>
+      <Typography
+        variant="h3"
+        sx={{
+          top: "50%",
+          position: "absolute",
+          left: "50%",
+          transform: "translate(-50%, 50%)",
+        }}
+        align="center"
+        color="white"
+      >
+        Ваша корзина пуста 🛒
+      </Typography>
     );
+  }
+
+  return (
+    <Box>
+      <Box mt="20px">
+        <Breadcrumbs color="white" aria-label="breadcrumb">
+          <Link to="/">Головна</Link>
+          <Typography color="white">Корзина</Typography>
+        </Breadcrumbs>
+      </Box>
+      <Grid width="100%" container mt="20px">
+        {itemInCart.map((game) => (
+          <OrderItem game={game} />
+        ))}
+      </Grid>
+      <Divider sx={{ marginTop: "25px" }} color="white" />
+      <Box mt="10px">
+        <Box display="flex" justifyContent="flex-end">
+          <Typography color="white">
+            Разом : {calcTotalPrice(itemInCart)} грн.
+          </Typography>
+        </Box>
+      </Box>
+    </Box>
+  );
 }
 
 export default OrderPage;

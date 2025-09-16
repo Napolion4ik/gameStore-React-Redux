@@ -7,35 +7,32 @@ import { AiOutlineShoppingCart, AiOutlineHome } from "react-icons/ai";
 import { RiAdminLine } from "react-icons/ri";
 
 const CustomDrawer = styled(Drawer)`
-    color: red;
+  color: red;
 `;
 
 function DrawerCustom({ setAnchor, anchor }) {
-    const handlerClose = (e) => {
-        if (e.type === "keydown" && (e.key === "Tab" || e.key === "Shift")) {
-            return;
-        }
-        setAnchor(false);
-    };
+  const handlerClose = (e) => {
+    if (e.type === "keydown" && (e.key === "Tab" || e.key === "Shift")) {
+      return;
+    }
+    setAnchor(false);
+  };
 
-    return (
-        <CustomDrawer anchor="left" open={anchor} onClose={handlerClose}>
-            <DrawerLink to="/" icon={<AiOutlineHome color="black" />}>
-                Главная
-            </DrawerLink>
-            <Divider />
-            <DrawerLink
-                to="/cart"
-                icon={<AiOutlineShoppingCart color="black" />}
-            >
-                Корзина
-            </DrawerLink>
-            <Divider />
-            <DrawerLink to="/create" icon={<RiAdminLine color="black" />}>
-                Админ Панель
-            </DrawerLink>
-        </CustomDrawer>
-    );
+  return (
+    <CustomDrawer anchor="left" open={anchor} onClose={handlerClose}>
+      <DrawerLink to="/" icon={<AiOutlineHome color="black" />}>
+        Головна
+      </DrawerLink>
+      <Divider />
+      <DrawerLink to="/cart" icon={<AiOutlineShoppingCart color="black" />}>
+        Корзина
+      </DrawerLink>
+      <Divider />
+      <DrawerLink to="/create" icon={<RiAdminLine color="black" />}>
+        Адмін Панель
+      </DrawerLink>
+    </CustomDrawer>
+  );
 }
 
 export default DrawerCustom;

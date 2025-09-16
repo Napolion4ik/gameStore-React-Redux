@@ -11,91 +11,84 @@ import CircularProgress from "@mui/material/CircularProgress";
 import GameItem from "../../components/game-item/GameItem";
 import { useEffect, useState } from "react";
 import {
-    getGames,
-    searcGame,
-    setByCategory,
+  getGames,
+  searcGame,
+  setByCategory,
 } from "../../redux/games/gamesReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { genres } from "../../constans/constanst";
 
 export default function HomePage() {
-    const dispatch = useDispatch();
-    const [activeGenres, setActiveGenres] = useState("Все");
+  const dispatch = useDispatch();
+  const [activeGenres, setActiveGenres] = useState("Всі");
 
-    const games = useSelector((state) => state.games.filterGame);
-    const status = useSelector((state) => state.games.status);
+  const games = useSelector((state) => state.games.filterGame);
+  const status = useSelector((state) => state.games.status);
 
-    useEffect(() => {
-        dispatch(getGames());
-    }, []);
+  useEffect(() => {
+    dispatch(getGames());
+  }, []);
 
-    const handlerChangeFilter = (e) => {
-        dispatch(setByCategory(e.target.value));
-        setActiveGenres(e.target.value);
-    };
+  const handlerChangeFilter = (e) => {
+    dispatch(setByCategory(e.target.value));
+    setActiveGenres(e.target.value);
+  };
 
-    const handlerSearch = (e) => {
-        setActiveGenres("Все");
-        dispatch(searcGame(e.target.value));
-    };
+  const handlerSearch = (e) => {
+    setActiveGenres("Всі");
+    dispatch(searcGame(e.target.value));
+  };
 
-    return (
+  return (
+    <>
+      {status ? (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: window.innerHeight / 2.5 + "px",
+          }}
+        >
+          <CircularProgress />
+        </Box>
+      ) : (
         <>
-            {status ? (
-                <Box
-                    sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                        marginTop: window.innerHeight / 2.5 + "px",
-                    }}
-                >
-                    <CircularProgress />
-                </Box>
-            ) : (
-                <>
-                    <Box mt="20px" mb="20px">
-                        <FormControl
-                            sx={{ width: "200px", marginRight: "20px" }}
-                        >
-                            <InputLabel
-                                id="simple-label"
-                                sx={{ color: "white" }}
-                            >
-                                Жанр
-                            </InputLabel>
-                            <Select
-                                color="info"
-                                labelId="simple-label"
-                                label="Жанр"
-                                onChange={handlerChangeFilter}
-                                name="select"
-                                value={activeGenres}
-                                sx={{ width: "200px", color: "white" }}
-                                info
-                            >
-                                {genres?.map((item) => (
-                                    <MenuItem key={item} value={item}>
-                                        <Typography color="black">
-                                            {item}
-                                        </Typography>
-                                    </MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
-                        <TextField
-                            placeholder="Поиск"
-                            color="info"
-                            type="text"
-                            onChange={handlerSearch}
-                        />
-                    </Box>
-                    <Grid container width="100%" justifyContent="space-around">
-                        {games?.map((game) => (
-                            <GameItem game={game} key={game.id} />
-                        ))}
-                    </Grid>
-                </>
-            )}
+          <Box mt="20px" mb="20px">
+            <FormControl sx={{ width: "200px", marginRight: "20px" }}>
+              <InputLabel id="simple-label" sx={{ color: "white" }}>
+                Жанр
+              </InputLabel>
+              <Select
+                color="info"
+                labelId="simple-label"
+                label="Жанр"
+                onChange={handlerChangeFilter}
+                name="select"
+                value={activeGenres}
+                sx={{ width: "200px", color: "white" }}
+                info
+              >
+                {genres?.map((item) => (
+                  <MenuItem key={item} value={item}>
+                    <Typography color="black">{item}</Typography>
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <TextField
+              placeholder="Пошук"
+              color="info"
+              type="text"
+              onChange={handlerSearch}
+            />
+          </Box>
+          <Grid container width="100%" justifyContent="space-around">
+            {games?.map((game) => (
+              <GameItem game={game} key={game.id} />
+            ))}
+          </Grid>
         </>
-    );
+      )}
+    </>
+  );
 }
