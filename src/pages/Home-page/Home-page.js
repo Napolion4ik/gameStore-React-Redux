@@ -27,7 +27,7 @@ export default function HomePage() {
 
   useEffect(() => {
     dispatch(getGames());
-  }, []);
+  }, [dispatch]);
 
   const handlerChangeFilter = (e) => {
     dispatch(setByCategory(e.target.value));

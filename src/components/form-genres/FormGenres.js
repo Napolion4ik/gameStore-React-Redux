@@ -52,16 +52,16 @@ function FormGenres({ onChange, genresItem }) {
         variant="filled"
       >
         {genres.map((name) => {
-          if (name === "Всі") return;
-          return (
-            <MenuItem
-              style={getStyles(name, genresItem, theme)}
-              key={name}
-              value={name}
-            >
-              {name}
-            </MenuItem>
-          );
+          if (name === "Всі")
+            return (
+              <MenuItem
+                style={getStyles(name, genresItem, theme)}
+                key={name}
+                value={name}
+              >
+                {name}
+              </MenuItem>
+            );
         })}
       </Select>
     </FormControl>
