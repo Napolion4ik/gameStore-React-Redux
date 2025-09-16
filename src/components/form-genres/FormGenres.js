@@ -52,7 +52,7 @@ function FormGenres({ onChange, genresItem }) {
         variant="filled"
       >
         {genres.map((name) => {
-          if (name === "Всі")
+          if (name === "Всі") {
             return (
               <MenuItem
                 style={getStyles(name, genresItem, theme)}
@@ -62,6 +62,8 @@ function FormGenres({ onChange, genresItem }) {
                 {name}
               </MenuItem>
             );
+          }
+          return null;
         })}
       </Select>
     </FormControl>
